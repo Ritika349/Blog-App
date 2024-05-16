@@ -1,8 +1,11 @@
-import { Navbar, TextInput } from "flowbite-react";
-import {Link} from "react-router-dom"
+import { Navbar, NavbarCollapse, NavbarLink, NavbarToggle, TextInput } from "flowbite-react";
+import {Link,useLocation} from "react-router-dom"
 import { AiOutlineSearch } from "react-icons/ai";
 import { Button } from "flowbite-react";
+import { FaMoon } from "react-icons/fa";
+
 const Header = () => {
+  const path=useLocation().pathname;
   return (
   
     <Navbar className="border-b-2 ">
@@ -11,17 +14,29 @@ const Header = () => {
      Blog
     </Link>
     <form>
-       <TextInput placeholder="Search..." rightIcon={AiOutlineSearch} />
+       <TextInput placeholder="Search..." rightIcon={AiOutlineSearch} className="hidden lg:inline" />
     </form>
-   <div className="space-x-8">
-    <Link to ="/">Home</Link>
-    <Link to ="/about">About</Link>   
-    <Link to ="/projects">Projects</Link>
-    </div>
-    
+    <Button className="lg:hidden h-10 w-12" color="gray" pill ><AiOutlineSearch/></Button>
+  
+
+    <div className="flex gap-2 md:order-2">
+      <Button color="gray " className="h-10 w-12" pill><FaMoon/></Button>
   <Link to ="/signin"><Button outline gradientDuoTone="purpleToBlue">
         SignIn
       </Button></Link>
+      </div>
+      <NavbarToggle/>
+      <NavbarCollapse>
+      <NavbarLink active={path=="/"} as={"div"}>
+      <Link to ="/">Home</Link>
+      </NavbarLink>
+      <NavbarLink active={path=="/about"} as={"div"}>
+      <Link to ="/about">About</Link>   
+      </NavbarLink>
+      <NavbarLink active={path=="/projects"} as={"div"}>
+      <Link to ="/projects">Projects</Link>
+      </NavbarLink>
+    </NavbarCollapse>
     </Navbar>
   
   )
