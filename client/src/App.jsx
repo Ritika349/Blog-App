@@ -14,6 +14,8 @@ const App = () => {
     <div className='min-h-screen'>
     <Header/>
     <Routes>
+
+      
       <Route element={<Home/>} path='/'/>
       <Route element={<About/>} path='/about'/>
       <Route element={<Projects/>} path='/projects'/>
